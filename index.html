@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suivi de Calories</title>
+    <!-- Tailwind CSS CDN -->
+    <link rel="stylesheet" href="./styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="text-3xl font-bold mb-2">Suivi Quotidien</h1>
+            <p class="text-5xl font-extrabold" id="totalCaloriesDisplay">0 / 1300</p>
+            <p class="text-sm mt-1">calories consommées</p>
+        </div>
+
+        <div class="flex-grow p-4 overflow-y-auto" id="foodListContainer">
+            <!-- Food items will be rendered here -->
+            <div id="noItemsMessage" class="text-center text-gray-500 mt-8">
+                <p>Aucun aliment ajouté pour le moment.</p>
+                <p>Cliquez sur '+' pour commencer !</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reset button -->
+    <button id="resetButton" class="reset-button fixed bottom-4 left-4 text-red-500">Réinitialiser</button>
+    <!-- Add Button -->
+    <button id="addButton" class="add-button">+</button>
+
+    <!-- Modal for choosing food type -->
+    <div id="choiceModalOverlay" class="modal-overlay">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-semibold text-center text-gray-800 flex-grow">Ajouter un élément</h2>
+                <button id="closeChoiceModalBtn"
+                    class="text-gray-500 hover:text-gray-700 text-2xl font-bold">&times;</button>
+            </div>
+            <button id="addSimpleFoodBtn" class="modal-button modal-button-primary">Ajouter un aliment simple</button>
+            <button id="addDishBtn" class="modal-button modal-button-primary">Ajouter un plat</button>
+        </div>
+    </div>
+
+    <!-- Dans la modale de détails, remplacer le contenu existant par : -->
+    <div id="detailsModalOverlay" class="modal-overlay">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-semibold text-center text-gray-800 flex-grow" id="detailsModalTitle">Ajouter un
+                    aliment</h2>
+                <button id="closeDetailsModalBtn"
+                    class="text-gray-500 hover:text-gray-700 text-2xl font-bold">&times;</button>
+            </div>
+
+            <!-- Pour aliment simple -->
+            <div id="simpleFoodForm">
+                <input type="text" id="foodNameInput" class="input-field" placeholder="Nom (ex: banane, lasagnes)"
+                    required>
+                <input type="text" id="foodQuantityInput" class="input-field"
+                    placeholder="Quantité (ex: 150 grammes, une part)" required>
+            </div>
+
+            <!-- Pour plat avec ingrédients -->
+            <div id="dishForm" class="hidden">
+                <input type="text" id="dishNameInput" class="input-field" placeholder="Nom du plat" required>
+                <div id="ingredientsList"></div>
+                <button id="addIngredientBtn" class="modal-button modal-button-secondary mb-4">+ Ajouter un
+                    ingrédient</button>
+            </div>
+
+            <button id="submitFoodBtn" class="modal-button modal-button-primary flex items-center justify-center">
+                <span id="submitFoodBtnText">Estimer puis ajouter</span>
+            </button>
+            <div id="errorMessage" class="error-message hidden"></div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner"></div>
+        <p>Estimation des calories en cours...</p>
+        <p class="text-sm mt-2">Cela peut prendre quelques instants.</p>
+    </div>
+
+    <script type="module" src="./js/app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,257 @@
+body {
+    font-family: "Inter", sans-serif;
+    background-color: #f3f4f6; /* Light gray background */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align to top for better mobile scrolling */
+    min-height: 100dvh;
+    /* padding: 1rem; */
+    box-sizing: border-box;
+    width: 100%;
+}
+.container {
+    width: 100%;
+    max-width: 400px; /* Max width for mobile-first design */
+    background-color: #ffffff;
+    border-radius: 0 !important ; /* More rounded corners */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Softer shadow */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 80vh; /* Make it taller for better content display */
+}
+.header {
+    background-color: #6366f1; /* Indigo color */
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    border-bottom-left-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+    position: relative; /* For the subtle wave effect */
+    overflow: hidden;
+}
+.header::before {
+    content: "";
+    position: absolute;
+    bottom: -20px;
+    left: -10%;
+    width: 120%;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transform: rotate(-5deg);
+}
+.add-button {
+    background-color: #4f46e5; /* Darker indigo for button */
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+    position: fixed; /* Fixed position for the button */
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 100;
+}
+.add-button:active {
+    transform: scale(0.95);
+}
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+.modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+.modal-content {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 350px;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+.modal-overlay.show .modal-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+.modal-button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease-in-out;
+    width: 100%;
+    margin-bottom: 0.75rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.modal-button-primary {
+    background-color: #6366f1;
+    color: white;
+}
+.modal-button-primary:hover {
+    background-color: #4f46e5;
+}
+.modal-button-secondary {
+    background-color: #e0e7ff; /* Light indigo */
+    color: #4f46e5;
+}
+.modal-button-secondary:hover {
+    background-color: #c7d2fe;
+}
+.input-field {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.75rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+.loading-spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid #fff;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+    margin-right: 0.5rem;
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 300;
+    color: white;
+    font-size: 1.2rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+.loading-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+.loading-overlay .spinner {
+    border: 6px solid rgba(255, 255, 255, 0.3);
+    border-top: 6px solid #6366f1;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+.error-message {
+    background-color: #fee2e2; /* Red background */
+    color: #ef4444; /* Red text */
+    padding: 1rem;
+    border-radius: 0.75rem;
+    margin-top: 1rem;
+    text-align: center;
+    font-weight: 500;
+}
+.food-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+    transition: background-color 0.2s ease-in-out;
+}
+.food-item:last-child {
+    border-bottom: none;
+}
+.food-item:hover {
+    background-color: #f9fafb;
+}
+.food-name {
+    font-weight: 500;
+    color: #374151;
+}
+.food-details {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+.food-calories {
+    font-weight: 600;
+    color: #4f46e5;
+}
+
+
+.ingredient-item {
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.ingredient-item input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    margin-bottom: 0.75rem;
+}
+
+.ingredient-item input:last-of-type {
+    margin-bottom: 0;
+}
+
+.remove-ingredient {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.remove-ingredient:hover {
+    background-color: #dc2626;
+}
